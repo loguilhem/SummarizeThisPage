@@ -1,0 +1,83 @@
+{
+  "language": {
+    "en": "Anglais",
+    "fr": "Français",
+    "de": "Allemand",
+    "it": "Italien"
+  },
+  "common": {
+    "default": "Par défaut",
+    "openai": "OpenAI",
+    "gemini": "Gemini"
+  },
+  "options": {
+    "pageTitle": "Paramètres - SummarizeThisPage",
+    "intro": "Configurez votre fournisseur LLM et vos préférences de résumé.",
+    "generalSection": "Général",
+    "uiLanguageLabel": "Langue de l'extension",
+    "providerSection": "Fournisseur LLM",
+    "activeProviderLabel": "Provider actif",
+    "testApiKey": "Tester la clé API",
+    "testNotRun": "Test non lancé.",
+    "testInProgress": "Test en cours...",
+    "apiKeyValid": "Clé API valide.",
+    "apiKeyInvalid": "La clé API n'a pas pu être validée.",
+    "openaiApiKeyLabel": "Clé API OpenAI",
+    "openaiModelLabel": "Modèle OpenAI",
+    "geminiApiKeyLabel": "Clé API Gemini",
+    "geminiModelLabel": "Modèle Gemini",
+    "summaryPreferencesSection": "Préférences de résumé",
+    "agentStyleLabel": "Agent / style préféré",
+    "summaryTypeLabel": "Type de résumé",
+    "summaryLengthLabel": "Longueur",
+    "privacyNote": "Le contenu de la page est envoyé au fournisseur LLM configuré. Aucune donnée n'est envoyée sans action explicite de votre part. L'extension ne collecte pas d'analytics et n'utilise aucun serveur tiers.",
+    "save": "Enregistrer",
+    "saved": "Paramètres enregistrés localement dans Chrome."
+  },
+  "sidepanel": {
+    "settingsLoading": "Chargement des paramètres...",
+    "openOptions": "Ouvrir les paramètres",
+    "summarizeButton": "Résumer cette page",
+    "outputLanguageLabel": "Sortie",
+    "loading": "Résumé en cours...",
+    "summaryTitle": "Résumé",
+    "summaryEmpty": "Le résumé apparaîtra ici après votre action.",
+    "extracting": "Extraction du contenu de la page...",
+    "technicalDetails": "Détails techniques",
+    "providerModel": "{provider} · {model}",
+    "missingProviderKey": "Clé API {provider} non configurée.",
+    "configureProviderKey": "Configurez votre clé API {provider} dans les paramètres avant de résumer une page.",
+    "unknownGenerationError": "Erreur inconnue pendant la génération du résumé.",
+    "emptyProviderSummary": "Le fournisseur LLM n'a pas renvoyé de résumé.",
+    "sourceComplete": "contenu complet",
+    "sourceTruncated": "contenu tronqué"
+  },
+  "agents": {
+    "neutral": "Neutre",
+    "monday": "Monday",
+    "business_analyst": "Analyste business",
+    "student": "Étudiant"
+  },
+  "summaryTypes": {
+    "main_ideas": "Idées principales",
+    "key_numbers": "Chiffres clés",
+    "tldr": "TL;DR",
+    "detailed": "Résumé détaillé"
+  },
+  "summaryLengths": {
+    "short": "Court",
+    "medium": "Moyen",
+    "detailed": "Détaillé"
+  },
+  "prompt": {
+    "languageName": "français",
+    "systemInstruction": "Tu es un assistant de synthèse. Réponds uniquement en français, de façon claire, fidèle et structurée.",
+    "template": "Tu es {agent}. Résume cette page en français.\n\nURL : {url}\nTitre : {title}\n\nType de résumé : {summaryType}\nLongueur : {summaryLength}\n\nContraintes :\n- Sois clair et structuré.\n- Utilise des bullet points.\n- Mets en avant les informations essentielles.\n- Si des chiffres clés sont présents, affiche-les.\n- N'invente rien.\n- Si le contenu est insuffisant, indique-le.\n- L'article source peut être dans une autre langue ; retourne toujours le résumé en français.\n\nContenu :\n{pageText}",
+    "agents": {
+      "neutral": "un assistant neutre et factuel",
+      "monday": "Monday, un assistant direct, concis et légèrement sarcastique sans perdre en précision",
+      "business_analyst": "un analyste business qui met en avant les impacts, risques, opportunités et chiffres clés",
+      "student": "un étudiant méthodique qui reformule simplement les notions importantes"
+    }
+  }
+}

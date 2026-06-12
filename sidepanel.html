@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SummarizeThisPage</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body class="sidepanel-body">
+    <main class="sidepanel-shell">
+      <header class="app-header">
+        <div>
+          <h1>SummarizeThisPage</h1>
+          <p id="settingsStatus" class="muted" data-i18n="sidepanel.settingsLoading">Loading settings...</p>
+        </div>
+        <button id="openOptionsButton" class="icon-button" type="button" title="Open settings" aria-label="Open settings" data-i18n-title="sidepanel.openOptions" data-i18n-aria-label="sidepanel.openOptions">
+          ⚙
+        </button>
+      </header>
+
+      <section class="panel-section">
+        <div class="summary-action-row">
+          <button id="summarizeButton" class="primary-button" type="button" data-i18n="sidepanel.summarizeButton">
+            Summarize this page
+          </button>
+          <label class="inline-field">
+            <span data-i18n="sidepanel.outputLanguageLabel">Output</span>
+            <select id="summaryLanguageOverride">
+              <option value="default" data-i18n="common.default">Default</option>
+              <option value="en" data-i18n="language.en">English</option>
+              <option value="fr" data-i18n="language.fr">French</option>
+              <option value="de" data-i18n="language.de">German</option>
+              <option value="it" data-i18n="language.it">Italian</option>
+            </select>
+          </label>
+        </div>
+        <div id="loadingState" class="loading-state hidden" role="status" aria-live="polite">
+          <span class="spinner" aria-hidden="true"></span>
+          <span data-i18n="sidepanel.loading">Generating summary...</span>
+        </div>
+      </section>
+
+      <section id="errorBox" class="message message-error hidden" role="alert"></section>
+
+      <section class="summary-section" aria-live="polite">
+        <div class="section-title-row">
+          <h2 data-i18n="sidepanel.summaryTitle">Summary</h2>
+          <span id="summaryMeta" class="meta"></span>
+        </div>
+        <div id="summaryOutput" class="summary-output empty" data-i18n="sidepanel.summaryEmpty">
+          The summary will appear here after your action.
+        </div>
+      </section>
+    </main>
+
+    <script src="i18n/i18n.js"></script>
+    <script src="sidepanel.js"></script>
+  </body>
+</html>

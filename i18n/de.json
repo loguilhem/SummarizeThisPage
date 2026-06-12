@@ -1,0 +1,83 @@
+{
+  "language": {
+    "en": "Englisch",
+    "fr": "Französisch",
+    "de": "Deutsch",
+    "it": "Italienisch"
+  },
+  "common": {
+    "default": "Standard",
+    "openai": "OpenAI",
+    "gemini": "Gemini"
+  },
+  "options": {
+    "pageTitle": "Einstellungen - SummarizeThisPage",
+    "intro": "Konfigurieren Sie Ihren LLM-Anbieter und Ihre Zusammenfassungsoptionen.",
+    "generalSection": "Allgemein",
+    "uiLanguageLabel": "Sprache der Erweiterung",
+    "providerSection": "LLM-Anbieter",
+    "activeProviderLabel": "Aktiver Anbieter",
+    "testApiKey": "API-Schlüssel testen",
+    "testNotRun": "Test nicht ausgeführt.",
+    "testInProgress": "Test läuft...",
+    "apiKeyValid": "API-Schlüssel ist gültig.",
+    "apiKeyInvalid": "Der API-Schlüssel konnte nicht validiert werden.",
+    "openaiApiKeyLabel": "OpenAI-API-Schlüssel",
+    "openaiModelLabel": "OpenAI-Modell",
+    "geminiApiKeyLabel": "Gemini-API-Schlüssel",
+    "geminiModelLabel": "Gemini-Modell",
+    "summaryPreferencesSection": "Zusammenfassungsoptionen",
+    "agentStyleLabel": "Bevorzugter Agent / Stil",
+    "summaryTypeLabel": "Art der Zusammenfassung",
+    "summaryLengthLabel": "Länge",
+    "privacyNote": "Der Seiteninhalt wird an den konfigurierten LLM-Anbieter gesendet. Ohne Ihre ausdrückliche Aktion werden keine Daten gesendet. Die Erweiterung erhebt keine Analytics-Daten und nutzt keinen Drittserver.",
+    "save": "Speichern",
+    "saved": "Einstellungen lokal in Chrome gespeichert."
+  },
+  "sidepanel": {
+    "settingsLoading": "Einstellungen werden geladen...",
+    "openOptions": "Einstellungen öffnen",
+    "summarizeButton": "Diese Seite zusammenfassen",
+    "outputLanguageLabel": "Ausgabe",
+    "loading": "Zusammenfassung wird erstellt...",
+    "summaryTitle": "Zusammenfassung",
+    "summaryEmpty": "Die Zusammenfassung erscheint hier nach Ihrer Aktion.",
+    "extracting": "Seiteninhalt wird extrahiert...",
+    "technicalDetails": "Technische Details",
+    "providerModel": "{provider} · {model}",
+    "missingProviderKey": "{provider}-API-Schlüssel ist nicht konfiguriert.",
+    "configureProviderKey": "Konfigurieren Sie Ihren {provider}-API-Schlüssel in den Einstellungen, bevor Sie eine Seite zusammenfassen.",
+    "unknownGenerationError": "Unbekannter Fehler beim Erstellen der Zusammenfassung.",
+    "emptyProviderSummary": "Der LLM-Anbieter hat keine Zusammenfassung zurückgegeben.",
+    "sourceComplete": "vollständiger Inhalt",
+    "sourceTruncated": "gekürzter Inhalt"
+  },
+  "agents": {
+    "neutral": "Neutral",
+    "monday": "Monday",
+    "business_analyst": "Business-Analyst",
+    "student": "Student"
+  },
+  "summaryTypes": {
+    "main_ideas": "Hauptideen",
+    "key_numbers": "Kennzahlen",
+    "tldr": "TL;DR",
+    "detailed": "Detaillierte Zusammenfassung"
+  },
+  "summaryLengths": {
+    "short": "Kurz",
+    "medium": "Mittel",
+    "detailed": "Detailliert"
+  },
+  "prompt": {
+    "languageName": "Deutsch",
+    "systemInstruction": "Du bist ein Assistent für Zusammenfassungen. Antworte ausschließlich auf Deutsch, klar, genau und strukturiert.",
+    "template": "Du bist {agent}. Fasse diese Seite auf Deutsch zusammen.\n\nURL: {url}\nTitel: {title}\n\nArt der Zusammenfassung: {summaryType}\nLänge: {summaryLength}\n\nVorgaben:\n- Sei klar und strukturiert.\n- Verwende Stichpunkte.\n- Hebe die wichtigsten Informationen hervor.\n- Wenn Kennzahlen vorhanden sind, führe sie auf.\n- Erfinde nichts.\n- Wenn der Inhalt unzureichend ist, sage es.\n- Der Quellartikel kann in einer anderen Sprache verfasst sein; gib die Zusammenfassung immer auf Deutsch zurück.\n\nInhalt:\n{pageText}",
+    "agents": {
+      "neutral": "ein neutraler und sachlicher Assistent",
+      "monday": "Monday, ein direkter, knapper Assistent mit leichtem Sarkasmus, ohne an Präzision zu verlieren",
+      "business_analyst": "ein Business-Analyst, der Auswirkungen, Risiken, Chancen und Kennzahlen hervorhebt",
+      "student": "ein methodischer Student, der wichtige Gedanken einfach erklärt"
+    }
+  }
+}

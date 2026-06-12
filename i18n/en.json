@@ -1,0 +1,83 @@
+{
+  "language": {
+    "en": "English",
+    "fr": "French",
+    "de": "German",
+    "it": "Italian"
+  },
+  "common": {
+    "default": "Default",
+    "openai": "OpenAI",
+    "gemini": "Gemini"
+  },
+  "options": {
+    "pageTitle": "Settings - SummarizeThisPage",
+    "intro": "Configure your LLM provider and summary preferences.",
+    "generalSection": "General",
+    "uiLanguageLabel": "Extension language",
+    "providerSection": "LLM provider",
+    "activeProviderLabel": "Active provider",
+    "testApiKey": "Test API key",
+    "testNotRun": "Test not run.",
+    "testInProgress": "Testing...",
+    "apiKeyValid": "API key is valid.",
+    "apiKeyInvalid": "The API key could not be validated.",
+    "openaiApiKeyLabel": "OpenAI API key",
+    "openaiModelLabel": "OpenAI model",
+    "geminiApiKeyLabel": "Gemini API key",
+    "geminiModelLabel": "Gemini model",
+    "summaryPreferencesSection": "Summary preferences",
+    "agentStyleLabel": "Preferred agent / style",
+    "summaryTypeLabel": "Summary type",
+    "summaryLengthLabel": "Length",
+    "privacyNote": "The page content is sent to the configured LLM provider. No data is sent without your explicit action. The extension collects no analytics and uses no third-party server.",
+    "save": "Save",
+    "saved": "Settings saved locally in Chrome."
+  },
+  "sidepanel": {
+    "settingsLoading": "Loading settings...",
+    "openOptions": "Open settings",
+    "summarizeButton": "Summarize this page",
+    "outputLanguageLabel": "Output",
+    "loading": "Generating summary...",
+    "summaryTitle": "Summary",
+    "summaryEmpty": "The summary will appear here after your action.",
+    "extracting": "Extracting page content...",
+    "technicalDetails": "Technical details",
+    "providerModel": "{provider} · {model}",
+    "missingProviderKey": "{provider} API key is not configured.",
+    "configureProviderKey": "Configure your {provider} API key in settings before summarizing a page.",
+    "unknownGenerationError": "Unknown error while generating the summary.",
+    "emptyProviderSummary": "The LLM provider did not return a summary.",
+    "sourceComplete": "full content",
+    "sourceTruncated": "truncated content"
+  },
+  "agents": {
+    "neutral": "Neutral",
+    "monday": "Monday",
+    "business_analyst": "Business analyst",
+    "student": "Student"
+  },
+  "summaryTypes": {
+    "main_ideas": "Main ideas",
+    "key_numbers": "Key numbers",
+    "tldr": "TL;DR",
+    "detailed": "Detailed summary"
+  },
+  "summaryLengths": {
+    "short": "Short",
+    "medium": "Medium",
+    "detailed": "Detailed"
+  },
+  "prompt": {
+    "languageName": "English",
+    "systemInstruction": "You are a summarization assistant. Reply only in English, clearly, faithfully and with structure.",
+    "template": "You are {agent}. Summarize this page in English.\n\nURL: {url}\nTitle: {title}\n\nSummary type: {summaryType}\nLength: {summaryLength}\n\nConstraints:\n- Be clear and structured.\n- Use bullet points.\n- Highlight essential information.\n- If key numbers are present, include them.\n- Do not invent anything.\n- If the content is insufficient, say so.\n- The source article may be in another language; always return the summary in English.\n\nContent:\n{pageText}",
+    "agents": {
+      "neutral": "a neutral and factual assistant",
+      "monday": "Monday, a direct, concise assistant with light sarcasm without losing precision",
+      "business_analyst": "a business analyst who highlights impacts, risks, opportunities and key numbers",
+      "student": "a methodical student who explains important ideas simply"
+    }
+  }
+}

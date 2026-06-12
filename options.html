@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title data-i18n="options.pageTitle">Settings - SummarizeThisPage</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body class="options-body">
+    <main class="options-shell">
+      <header class="options-header">
+        <div class="options-brand">
+          <img class="options-logo" src="logo_stp.png" alt="" width="56" height="56">
+          <div>
+            <h1>SummarizeThisPage</h1>
+            <p data-i18n="options.intro">Configure your LLM provider and summary preferences.</p>
+          </div>
+        </div>
+      </header>
+
+      <form id="optionsForm" class="options-form">
+        <section class="form-section">
+          <h2 data-i18n="options.generalSection">General</h2>
+
+          <label class="field">
+            <span data-i18n="options.uiLanguageLabel">Extension language</span>
+            <select id="uiLanguage">
+              <option value="en" data-i18n="language.en">English</option>
+              <option value="fr" data-i18n="language.fr">French</option>
+              <option value="de" data-i18n="language.de">German</option>
+              <option value="it" data-i18n="language.it">Italian</option>
+            </select>
+          </label>
+        </section>
+
+        <section class="form-section">
+          <h2 data-i18n="options.providerSection">LLM provider</h2>
+
+          <label class="field">
+            <span data-i18n="options.activeProviderLabel">Active provider</span>
+            <select id="llmProvider">
+              <option value="openai">OpenAI</option>
+              <option value="gemini">Gemini</option>
+            </select>
+          </label>
+
+          <div class="provider-test">
+            <button id="testProviderButton" class="secondary-button" type="button" data-i18n="options.testApiKey">
+              Test API key
+            </button>
+            <div id="providerTestStatus" class="test-status test-status-idle" role="status" aria-live="polite">
+              <span id="providerTestIcon" class="test-status-icon" aria-hidden="true">*</span>
+              <span id="providerTestText" data-i18n="options.testNotRun">Test not run.</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="form-section provider-settings" data-provider="openai">
+          <h2>OpenAI</h2>
+
+          <label class="field">
+            <span data-i18n="options.openaiApiKeyLabel">OpenAI API key</span>
+            <input id="openaiApiKey" type="password" autocomplete="off" placeholder="sk-..." aria-describedby="privacyNote">
+          </label>
+
+          <label class="field">
+            <span data-i18n="options.openaiModelLabel">OpenAI model</span>
+            <input id="openaiModel" type="text" value="gpt-4o-mini" spellcheck="false">
+          </label>
+        </section>
+
+        <section class="form-section provider-settings" data-provider="gemini">
+          <h2>Gemini</h2>
+
+          <label class="field">
+            <span data-i18n="options.geminiApiKeyLabel">Gemini API key</span>
+            <input id="geminiApiKey" type="password" autocomplete="off" placeholder="AIza..." aria-describedby="privacyNote">
+          </label>
+
+          <label class="field">
+            <span data-i18n="options.geminiModelLabel">Gemini model</span>
+            <input id="geminiModel" type="text" value="gemini-3.5-flash" spellcheck="false">
+          </label>
+        </section>
+
+        <section class="form-section">
+          <h2 data-i18n="options.summaryPreferencesSection">Summary preferences</h2>
+
+          <label class="field">
+            <span data-i18n="options.agentStyleLabel">Preferred agent / style</span>
+            <select id="agentStyle">
+              <option value="neutral" data-i18n="agents.neutral">Neutral</option>
+              <option value="monday" data-i18n="agents.monday">Monday</option>
+              <option value="business_analyst" data-i18n="agents.business_analyst">Business analyst</option>
+              <option value="student" data-i18n="agents.student">Student</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span data-i18n="options.summaryTypeLabel">Summary type</span>
+            <select id="summaryType">
+              <option value="main_ideas" data-i18n="summaryTypes.main_ideas">Main ideas</option>
+              <option value="key_numbers" data-i18n="summaryTypes.key_numbers">Key numbers</option>
+              <option value="tldr" data-i18n="summaryTypes.tldr">TL;DR</option>
+              <option value="detailed" data-i18n="summaryTypes.detailed">Detailed summary</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span data-i18n="options.summaryLengthLabel">Length</span>
+            <select id="summaryLength">
+              <option value="short" data-i18n="summaryLengths.short">Short</option>
+              <option value="medium" data-i18n="summaryLengths.medium">Medium</option>
+              <option value="detailed" data-i18n="summaryLengths.detailed">Detailed</option>
+            </select>
+          </label>
+        </section>
+
+        <p id="privacyNote" class="privacy-note" data-i18n="options.privacyNote">
+          The page content is sent to the configured LLM provider. No data is sent without your explicit action. The extension collects no analytics and uses no third-party server.
+        </p>
+
+        <div id="statusMessage" class="message message-success hidden" role="status" aria-live="polite"></div>
+
+        <div class="form-actions">
+          <button class="primary-button" type="submit" data-i18n="options.save">Save</button>
+        </div>
+      </form>
+    </main>
+
+    <script src="i18n/i18n.js"></script>
+    <script src="options.js"></script>
+  </body>
+</html>

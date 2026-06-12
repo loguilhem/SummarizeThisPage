@@ -1,0 +1,83 @@
+{
+  "language": {
+    "en": "Inglese",
+    "fr": "Francese",
+    "de": "Tedesco",
+    "it": "Italiano"
+  },
+  "common": {
+    "default": "Predefinito",
+    "openai": "OpenAI",
+    "gemini": "Gemini"
+  },
+  "options": {
+    "pageTitle": "Impostazioni - SummarizeThisPage",
+    "intro": "Configura il tuo provider LLM e le preferenze di riepilogo.",
+    "generalSection": "Generale",
+    "uiLanguageLabel": "Lingua dell'estensione",
+    "providerSection": "Provider LLM",
+    "activeProviderLabel": "Provider attivo",
+    "testApiKey": "Testa la chiave API",
+    "testNotRun": "Test non avviato.",
+    "testInProgress": "Test in corso...",
+    "apiKeyValid": "Chiave API valida.",
+    "apiKeyInvalid": "Impossibile validare la chiave API.",
+    "openaiApiKeyLabel": "Chiave API OpenAI",
+    "openaiModelLabel": "Modello OpenAI",
+    "geminiApiKeyLabel": "Chiave API Gemini",
+    "geminiModelLabel": "Modello Gemini",
+    "summaryPreferencesSection": "Preferenze di riepilogo",
+    "agentStyleLabel": "Agente / stile preferito",
+    "summaryTypeLabel": "Tipo di riepilogo",
+    "summaryLengthLabel": "Lunghezza",
+    "privacyNote": "Il contenuto della pagina viene inviato al provider LLM configurato. Nessun dato viene inviato senza una tua azione esplicita. L'estensione non raccoglie analytics e non usa server di terze parti.",
+    "save": "Salva",
+    "saved": "Impostazioni salvate localmente in Chrome."
+  },
+  "sidepanel": {
+    "settingsLoading": "Caricamento impostazioni...",
+    "openOptions": "Apri impostazioni",
+    "summarizeButton": "Riassumi questa pagina",
+    "outputLanguageLabel": "Output",
+    "loading": "Generazione del riepilogo...",
+    "summaryTitle": "Riepilogo",
+    "summaryEmpty": "Il riepilogo apparirà qui dopo la tua azione.",
+    "extracting": "Estrazione del contenuto della pagina...",
+    "technicalDetails": "Dettagli tecnici",
+    "providerModel": "{provider} · {model}",
+    "missingProviderKey": "Chiave API {provider} non configurata.",
+    "configureProviderKey": "Configura la chiave API {provider} nelle impostazioni prima di riassumere una pagina.",
+    "unknownGenerationError": "Errore sconosciuto durante la generazione del riepilogo.",
+    "emptyProviderSummary": "Il provider LLM non ha restituito alcun riepilogo.",
+    "sourceComplete": "contenuto completo",
+    "sourceTruncated": "contenuto troncato"
+  },
+  "agents": {
+    "neutral": "Neutro",
+    "monday": "Monday",
+    "business_analyst": "Analista business",
+    "student": "Studente"
+  },
+  "summaryTypes": {
+    "main_ideas": "Idee principali",
+    "key_numbers": "Numeri chiave",
+    "tldr": "TL;DR",
+    "detailed": "Riepilogo dettagliato"
+  },
+  "summaryLengths": {
+    "short": "Breve",
+    "medium": "Medio",
+    "detailed": "Dettagliato"
+  },
+  "prompt": {
+    "languageName": "italiano",
+    "systemInstruction": "Sei un assistente per riepiloghi. Rispondi solo in italiano, in modo chiaro, fedele e strutturato.",
+    "template": "Sei {agent}. Riassumi questa pagina in italiano.\n\nURL: {url}\nTitolo: {title}\n\nTipo di riepilogo: {summaryType}\nLunghezza: {summaryLength}\n\nVincoli:\n- Sii chiaro e strutturato.\n- Usa elenchi puntati.\n- Metti in evidenza le informazioni essenziali.\n- Se sono presenti numeri chiave, mostrali.\n- Non inventare nulla.\n- Se il contenuto è insufficiente, indicalo.\n- L'articolo sorgente potrebbe essere in un'altra lingua; restituisci sempre il riepilogo in italiano.\n\nContenuto:\n{pageText}",
+    "agents": {
+      "neutral": "un assistente neutro e fattuale",
+      "monday": "Monday, un assistente diretto, conciso e leggermente sarcastico senza perdere precisione",
+      "business_analyst": "un analista business che evidenzia impatti, rischi, opportunità e numeri chiave",
+      "student": "uno studente metodico che riformula in modo semplice i concetti importanti"
+    }
+  }
+}
