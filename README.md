@@ -1,12 +1,12 @@
 # SummarizeThisPage
 
-SummarizeThisPage is a Chrome extension that generates a summary of the current web page in a convenient side panel. It connects directly to your chosen LLM provider using your own API key.
+SummarizeThisPage is a Chrome and Firefox extension that generates a summary of the current web page in a convenient side panel. It connects directly to your chosen LLM provider using your own API key.
 
 ## Features
 
 - Summarizes the main content of the active web page
 - Supports OpenAI and Google Gemini
-- Displays summaries in Chrome's side panel
+- Displays summaries in Chrome's side panel or Firefox's sidebar
 - Offers multiple summary types: main ideas, key numbers, TL;DR, and detailed summary
 - Provides short, medium, and detailed output lengths
 - Includes neutral, Monday, business analyst, and student writing styles
@@ -16,13 +16,32 @@ SummarizeThisPage is a Chrome extension that generates a summary of the current 
 
 ## Installation
 
-This extension can be loaded locally in any Chromium-based browser that supports Manifest V3 and the Side Panel API. Chrome 114 or later is required.
+The project uses separate manifests for Chrome and Firefox while sharing the same application code. Run the packaging script before loading the extension:
 
-1. Download or clone this repository.
-2. Open `chrome://extensions` in Chrome.
-3. Enable **Developer mode**.
-4. Click **Load unpacked**.
-5. Select the project directory.
+```powershell
+.\build.ps1
+```
+
+This creates `dist/chrome` and `dist/firefox`.
+
+### Chrome
+
+Chrome 121 or later is required.
+
+1. Open `chrome://extensions`.
+2. Enable **Developer mode**.
+3. Click **Load unpacked**.
+4. Select the `dist/chrome` directory.
+
+### Firefox
+
+Firefox 109 or later is required.
+
+1. Open `about:debugging#/runtime/this-firefox`.
+2. Click **Load Temporary Add-on**.
+3. Select the root `manifest.json` directly, or `dist/firefox/manifest.json` after running the build script.
+
+Temporary Firefox extensions are removed when Firefox closes. For permanent installation, the extension must be packaged and signed through Mozilla Add-ons.
 
 ## Configuration
 
@@ -38,7 +57,7 @@ The default model names are `gpt-4o-mini` for OpenAI and `gemini-3.5-flash` for 
 ## Usage
 
 1. Navigate to the web page you want to summarize.
-2. Click the SummarizeThisPage extension icon to open the side panel.
+2. Click the SummarizeThisPage extension icon to open the side panel or sidebar.
 3. Optionally choose a different output language.
 4. Click **Summarize this page**.
 
@@ -48,7 +67,7 @@ The extension extracts the page's main readable content and sends it directly to
 
 - Page content is sent only when you explicitly request a summary.
 - Requests are made directly from the extension to the selected LLM provider.
-- API keys and preferences are stored locally using Chrome's storage API.
+- API keys and preferences are stored locally using the browser's extension storage API.
 - The extension does not use an intermediary server.
 - The extension does not collect analytics.
 
@@ -56,10 +75,10 @@ Your use of OpenAI or Gemini remains subject to the selected provider's terms an
 
 ## Permissions
 
-The extension requests the following Chrome permissions:
+The extension requests the following browser permissions:
 
 - `activeTab` and `scripting` to access and extract content from the current page
-- `sidePanel` to display the extension interface
+- `sidePanel` on Chrome to display the extension interface
 - `storage` to save API keys and preferences locally
 - HTTP and HTTPS host access to process web pages and contact the configured provider
 
@@ -74,12 +93,14 @@ The extension requests the following Chrome permissions:
 |-- styles.css          # Shared styles
 |-- i18n/               # Interface and prompt translations
 |-- icons/              # Extension icons
-`-- manifest.json       # Chrome extension manifest
+|-- manifest.json       # Firefox extension manifest
+|-- manifest.chrome.json # Chrome extension manifest
+`-- build.ps1           # Chrome and Firefox packaging script
 ```
 
 ## Development
 
-The project uses plain HTML, CSS, and JavaScript, with no build step or external runtime dependencies. After changing a file, reload the extension from `chrome://extensions` and refresh the page being tested.
+The project uses plain HTML, CSS, and JavaScript with no external runtime dependencies. After changing a file, run `build.ps1` again, reload the extension from the browser's extension debugging page, and refresh the page being tested.
 
 ## License
 

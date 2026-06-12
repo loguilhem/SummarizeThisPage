@@ -1,3 +1,5 @@
+const EXTENSION_API = globalThis.browser || globalThis.chrome;
+
 const DEFAULT_SETTINGS = {
   uiLanguage: "en",
   llmProvider: "openai",
@@ -72,7 +74,7 @@ async function initializeOptions() {
 }
 
 async function restoreOptions() {
-  const settings = await chrome.storage.local.get(DEFAULT_SETTINGS);
+  const settings = await EXTENSION_API.storage.local.get(DEFAULT_SETTINGS);
 
   for (const [key, input] of Object.entries(fields)) {
     input.value = normalizeStoredValue(key, settings[key]);
@@ -87,7 +89,7 @@ async function saveOptions(event) {
   event.preventDefault();
   hideStatus();
 
-  await chrome.storage.local.set(getCurrentSettings());
+  await EXTENSION_API.storage.local.set(getCurrentSettings());
   showStatus(window.STP_I18N.t("options.saved"));
 }
 
@@ -97,7 +99,7 @@ async function testProviderConnection() {
   testProviderButton.disabled = true;
 
   try {
-    const response = await chrome.runtime.sendMessage({
+    const response = await EXTENSION_API.runtime.sendMessage({
       type: "TEST_LLM_PROVIDER",
       settings: getCurrentSettings()
     });

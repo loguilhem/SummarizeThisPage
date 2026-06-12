@@ -1,3 +1,5 @@
+const EXTENSION_API = globalThis.browser || globalThis.chrome;
+
 const DEFAULT_SETTINGS = {
   uiLanguage: "en",
   llmProvider: "openai",
@@ -53,19 +55,27 @@ const CHOICE_VALUES = {
 };
 const i18nMessageCache = new Map();
 
-chrome.runtime.onInstalled.addListener(() => {
+EXTENSION_API.runtime.onInstalled.addListener(() => {
   initializeExtension();
 });
 
-chrome.runtime.onStartup.addListener(() => {
+EXTENSION_API.runtime.onStartup.addListener(() => {
   restrictStorageAccess();
 });
 
-chrome.sidePanel
-  .setPanelBehavior({ openPanelOnActionClick: true })
-  .catch((error) => console.error("Unable to configure side panel behavior", error));
+if (EXTENSION_API.sidePanel?.setPanelBehavior) {
+  EXTENSION_API.sidePanel
+    .setPanelBehavior({ openPanelOnActionClick: true })
+    .catch((error) => console.error("Unable to configure side panel behavior", error));
+} else if (EXTENSION_API.sidebarAction?.open && EXTENSION_API.action?.onClicked) {
+  EXTENSION_API.action.onClicked.addListener(() => {
+    EXTENSION_API.sidebarAction
+      .open()
+      .catch((error) => console.error("Unable to open Firefox sidebar", error));
+  });
+}
 
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+EXTENSION_API.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message?.type === "SUMMARIZE_THIS_PAGE") {
     summarizeActiveTab(message.summaryLanguage)
       .then((result) => sendResponse({ ok: true, result }))
@@ -90,7 +100,7 @@ async function initializeExtension() {
 }
 
 async function ensureDefaultSettings() {
-  const current = await chrome.storage.local.get(Object.keys(DEFAULT_SETTINGS));
+  const current = await EXTENSION_API.storage.local.get(Object.keys(DEFAULT_SETTINGS));
   const missingDefaults = {};
 
   for (const [key, value] of Object.entries(DEFAULT_SETTINGS)) {
@@ -100,17 +110,17 @@ async function ensureDefaultSettings() {
   }
 
   if (Object.keys(missingDefaults).length > 0) {
-    await chrome.storage.local.set(missingDefaults);
+    await EXTENSION_API.storage.local.set(missingDefaults);
   }
 }
 
 async function restrictStorageAccess() {
-  if (!chrome.storage?.local?.setAccessLevel) {
+  if (!EXTENSION_API.storage?.local?.setAccessLevel) {
     return;
   }
 
   try {
-    await chrome.storage.local.setAccessLevel({ accessLevel: "TRUSTED_CONTEXTS" });
+    await EXTENSION_API.storage.local.setAccessLevel({ accessLevel: "TRUSTED_CONTEXTS" });
   } catch (error) {
     console.warn("Unable to restrict storage access level", error);
   }
@@ -130,7 +140,7 @@ async function summarizeActiveTab(summaryLanguageOverride = "default") {
     );
   }
 
-  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  const [tab] = await EXTENSION_API.tabs.query({ active: true, currentWindow: true });
 
   if (!tab?.id) {
     throw new UserVisibleError("Aucun onglet actif n'a été trouvé.", "missing_active_tab");
@@ -163,7 +173,7 @@ async function summarizeActiveTab(summaryLanguageOverride = "default") {
 }
 
 async function getSettings() {
-  const settings = await chrome.storage.local.get(DEFAULT_SETTINGS);
+  const settings = await EXTENSION_API.storage.local.get(DEFAULT_SETTINGS);
 
   return normalizeSettings(settings);
 }
@@ -209,20 +219,20 @@ function normalizeChoice(key, value) {
 }
 
 function isUnsupportedTabUrl(url) {
-  return /^(chrome|chrome-extension|edge|about|devtools|file):/i.test(url);
+  return /^(chrome|chrome-extension|moz-extension|edge|about|devtools|file):/i.test(url);
 }
 
 async function extractPageContent(tabId) {
   try {
-    return await chrome.tabs.sendMessage(tabId, { type: "SUMMARIZE_THIS_PAGE_EXTRACT" });
+    return await EXTENSION_API.tabs.sendMessage(tabId, { type: "SUMMARIZE_THIS_PAGE_EXTRACT" });
   } catch (firstError) {
     try {
-      await chrome.scripting.executeScript({
+      await EXTENSION_API.scripting.executeScript({
         target: { tabId },
         files: ["content.js"]
       });
 
-      return await chrome.tabs.sendMessage(tabId, { type: "SUMMARIZE_THIS_PAGE_EXTRACT" });
+      return await EXTENSION_API.tabs.sendMessage(tabId, { type: "SUMMARIZE_THIS_PAGE_EXTRACT" });
     } catch (secondError) {
       throw new UserVisibleError(
         "Impossible d'extraire le contenu de cette page. Rechargez l'onglet ou essayez une autre page web.",
@@ -484,7 +494,7 @@ async function loadI18nMessages(language) {
     return i18nMessageCache.get(normalizedLanguage);
   }
 
-  const response = await fetch(chrome.runtime.getURL(`i18n/${normalizedLanguage}.json`));
+  const response = await fetch(EXTENSION_API.runtime.getURL(`i18n/${normalizedLanguage}.json`));
   const messages = await response.json();
   i18nMessageCache.set(normalizedLanguage, messages);
 

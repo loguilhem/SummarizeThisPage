@@ -1,4 +1,6 @@
 (() => {
+  const EXTENSION_API = globalThis.browser || globalThis.chrome;
+
   const DEFAULT_LANGUAGE = "en";
   const SUPPORTED_LANGUAGES = ["en", "fr", "de", "it"];
   const messageCache = new Map();
@@ -8,7 +10,7 @@
   let fallbackMessages = {};
 
   async function init() {
-    const settings = await chrome.storage.local.get({ uiLanguage: DEFAULT_LANGUAGE });
+    const settings = await EXTENSION_API.storage.local.get({ uiLanguage: DEFAULT_LANGUAGE });
     await setLanguage(settings.uiLanguage || DEFAULT_LANGUAGE);
   }
 
@@ -30,7 +32,7 @@
       return messageCache.get(normalizedLanguage);
     }
 
-    const response = await fetch(chrome.runtime.getURL(`i18n/${normalizedLanguage}.json`));
+    const response = await fetch(EXTENSION_API.runtime.getURL(`i18n/${normalizedLanguage}.json`));
     const messages = await response.json();
     messageCache.set(normalizedLanguage, messages);
 

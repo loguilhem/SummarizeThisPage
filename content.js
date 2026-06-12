@@ -1,4 +1,6 @@
 (() => {
+  const EXTENSION_API = globalThis.browser || globalThis.chrome;
+
   if (window.__summarizeThisPageContentScriptLoaded) {
     return;
   }
@@ -8,7 +10,7 @@
   const MAX_CONTENT_LENGTH = 15000;
   const MIN_CONTENT_LENGTH = 120;
 
-  chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  EXTENSION_API.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message?.type !== "SUMMARIZE_THIS_PAGE_EXTRACT") {
       return false;
     }

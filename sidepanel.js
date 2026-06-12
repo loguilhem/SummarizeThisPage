@@ -1,3 +1,5 @@
+const EXTENSION_API = globalThis.browser || globalThis.chrome;
+
 const DEFAULT_SETTINGS = {
   uiLanguage: "en",
   llmProvider: "openai",
@@ -36,8 +38,8 @@ document.addEventListener("DOMContentLoaded", initializeSidePanel);
 async function initializeSidePanel() {
   await window.STP_I18N.init();
   summarizeButton.addEventListener("click", handleSummarizeClick);
-  openOptionsButton.addEventListener("click", () => chrome.runtime.openOptionsPage());
-  chrome.storage.onChanged.addListener(async (changes, areaName) => {
+  openOptionsButton.addEventListener("click", () => EXTENSION_API.runtime.openOptionsPage());
+  EXTENSION_API.storage.onChanged.addListener(async (changes, areaName) => {
     if (areaName === "local" && hasRelevantSettingsChange(changes)) {
       if (changes.uiLanguage) {
         await window.STP_I18N.setLanguage(changes.uiLanguage.newValue || DEFAULT_SETTINGS.uiLanguage);
@@ -52,7 +54,7 @@ async function initializeSidePanel() {
 }
 
 async function refreshSettingsStatus() {
-  const settings = await chrome.storage.local.get(DEFAULT_SETTINGS);
+  const settings = await EXTENSION_API.storage.local.get(DEFAULT_SETTINGS);
   const provider = getProviderConfig(settings.llmProvider);
   const hasApiKey = Boolean(String(settings[provider.apiKeySetting] || "").trim());
   const model = settings[provider.modelSetting] || DEFAULT_SETTINGS[provider.modelSetting];
@@ -77,7 +79,7 @@ async function handleSummarizeClick() {
   summaryOutput.textContent = window.STP_I18N.t("sidepanel.extracting");
 
   try {
-    const response = await chrome.runtime.sendMessage({
+    const response = await EXTENSION_API.runtime.sendMessage({
       type: "SUMMARIZE_THIS_PAGE",
       summaryLanguage: summaryLanguageOverride.value
     });
