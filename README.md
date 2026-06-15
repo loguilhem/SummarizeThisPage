@@ -30,7 +30,7 @@ You can also create a clean distribution directory:
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\build.ps1
 ```
 
-Then load `dist/firefox/manifest.json` from Firefox. Temporary extensions are removed when Firefox closes. Permanent installation requires packaging and signing through Mozilla Add-ons.
+Then load `dist/firefox/manifest.json` from Firefox. The build also creates `dist/SummarizeThisPage-firefox.zip` for submission to Mozilla Add-ons. Temporary extensions are removed when Firefox closes.
 
 ## Configuration
 
@@ -56,6 +56,7 @@ The extension extracts the page's readable content and sends it directly to the 
 
 - Page content is sent only after an explicit summarization request.
 - Requests go directly to the selected LLM provider.
+- The selected provider receives the page content and API key required to process the request.
 - API keys and preferences use Firefox extension storage.
 - No intermediary server or analytics is used.
 

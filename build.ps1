@@ -1,6 +1,7 @@
 $ErrorActionPreference = "Stop"
 $ProjectRoot = $PSScriptRoot
 $OutputDirectory = Join-Path $ProjectRoot "dist\firefox"
+$ArchivePath = Join-Path $ProjectRoot "dist\SummarizeThisPage-firefox.zip"
 $Files = @(
   "background.js",
   "content.js",
@@ -30,4 +31,10 @@ foreach ($Directory in $Directories) {
   Copy-Item -LiteralPath (Join-Path $ProjectRoot $Directory) -Destination $OutputDirectory -Recurse
 }
 
+if (Test-Path $ArchivePath) {
+  Remove-Item -LiteralPath $ArchivePath -Force
+}
+
+Compress-Archive -Path (Join-Path $OutputDirectory "*") -DestinationPath $ArchivePath
 Write-Output "Built Firefox extension in $OutputDirectory"
+Write-Output "Built Firefox submission archive at $ArchivePath"
