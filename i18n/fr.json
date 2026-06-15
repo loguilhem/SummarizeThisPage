@@ -32,7 +32,7 @@
     "summaryLengthLabel": "Longueur",
     "privacyNote": "Le contenu de la page est envoyé au fournisseur LLM configuré. Aucune donnée n'est envoyée sans action explicite de votre part. L'extension ne collecte pas d'analytics et n'utilise aucun serveur tiers.",
     "save": "Enregistrer",
-    "saved": "Paramètres enregistrés localement dans Chrome."
+    "saved": "Paramètres enregistrés localement dans Firefox."
   },
   "sidepanel": {
     "settingsLoading": "Chargement des paramètres...",

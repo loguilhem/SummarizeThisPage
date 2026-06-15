@@ -32,7 +32,7 @@
     "summaryLengthLabel": "Länge",
     "privacyNote": "Der Seiteninhalt wird an den konfigurierten LLM-Anbieter gesendet. Ohne Ihre ausdrückliche Aktion werden keine Daten gesendet. Die Erweiterung erhebt keine Analytics-Daten und nutzt keinen Drittserver.",
     "save": "Speichern",
-    "saved": "Einstellungen lokal in Chrome gespeichert."
+    "saved": "Einstellungen lokal in Firefox gespeichert."
   },
   "sidepanel": {
     "settingsLoading": "Einstellungen werden geladen...",

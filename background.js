@@ -1,4 +1,4 @@
-const EXTENSION_API = globalThis.browser || globalThis.chrome;
+const EXTENSION_API = globalThis.browser;
 
 const DEFAULT_SETTINGS = {
   uiLanguage: "en",
@@ -59,21 +59,11 @@ EXTENSION_API.runtime.onInstalled.addListener(() => {
   initializeExtension();
 });
 
-EXTENSION_API.runtime.onStartup.addListener(() => {
-  restrictStorageAccess();
+EXTENSION_API.action.onClicked.addListener(() => {
+  EXTENSION_API.sidebarAction
+    .open()
+    .catch((error) => console.error("Unable to open Firefox sidebar", error));
 });
-
-if (EXTENSION_API.sidePanel?.setPanelBehavior) {
-  EXTENSION_API.sidePanel
-    .setPanelBehavior({ openPanelOnActionClick: true })
-    .catch((error) => console.error("Unable to configure side panel behavior", error));
-} else if (EXTENSION_API.sidebarAction?.open && EXTENSION_API.action?.onClicked) {
-  EXTENSION_API.action.onClicked.addListener(() => {
-    EXTENSION_API.sidebarAction
-      .open()
-      .catch((error) => console.error("Unable to open Firefox sidebar", error));
-  });
-}
 
 EXTENSION_API.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message?.type === "SUMMARIZE_THIS_PAGE") {
@@ -96,7 +86,7 @@ EXTENSION_API.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 
 async function initializeExtension() {
-  await Promise.all([ensureDefaultSettings(), restrictStorageAccess()]);
+  await ensureDefaultSettings();
 }
 
 async function ensureDefaultSettings() {
@@ -111,18 +101,6 @@ async function ensureDefaultSettings() {
 
   if (Object.keys(missingDefaults).length > 0) {
     await EXTENSION_API.storage.local.set(missingDefaults);
-  }
-}
-
-async function restrictStorageAccess() {
-  if (!EXTENSION_API.storage?.local?.setAccessLevel) {
-    return;
-  }
-
-  try {
-    await EXTENSION_API.storage.local.setAccessLevel({ accessLevel: "TRUSTED_CONTEXTS" });
-  } catch (error) {
-    console.warn("Unable to restrict storage access level", error);
   }
 }
 
@@ -219,7 +197,7 @@ function normalizeChoice(key, value) {
 }
 
 function isUnsupportedTabUrl(url) {
-  return /^(chrome|chrome-extension|moz-extension|edge|about|devtools|file):/i.test(url);
+  return /^(moz-extension|about|view-source|file):/i.test(url);
 }
 
 async function extractPageContent(tabId) {

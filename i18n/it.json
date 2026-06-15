@@ -32,7 +32,7 @@
     "summaryLengthLabel": "Lunghezza",
     "privacyNote": "Il contenuto della pagina viene inviato al provider LLM configurato. Nessun dato viene inviato senza una tua azione esplicita. L'estensione non raccoglie analytics e non usa server di terze parti.",
     "save": "Salva",
-    "saved": "Impostazioni salvate localmente in Chrome."
+    "saved": "Impostazioni salvate localmente in Firefox."
   },
   "sidepanel": {
     "settingsLoading": "Caricamento impostazioni...",

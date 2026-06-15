@@ -32,7 +32,7 @@
     "summaryLengthLabel": "Length",
     "privacyNote": "The page content is sent to the configured LLM provider. No data is sent without your explicit action. The extension collects no analytics and uses no third-party server.",
     "save": "Save",
-    "saved": "Settings saved locally in Chrome."
+    "saved": "Settings saved locally in Firefox."
   },
   "sidepanel": {
     "settingsLoading": "Loading settings...",

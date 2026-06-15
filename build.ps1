@@ -1,14 +1,10 @@
-param(
-  [ValidateSet("chrome", "firefox", "all")]
-  [string]$Target = "all"
-)
-
 $ErrorActionPreference = "Stop"
 $ProjectRoot = $PSScriptRoot
-$DistRoot = Join-Path $ProjectRoot "dist"
-$CommonFiles = @(
+$OutputDirectory = Join-Path $ProjectRoot "dist\firefox"
+$Files = @(
   "background.js",
   "content.js",
+  "manifest.json",
   "markdown.js",
   "sidepanel.html",
   "sidepanel.js",
@@ -18,38 +14,20 @@ $CommonFiles = @(
   "logo_stp.png",
   "LICENSE"
 )
-$CommonDirectories = @("icons", "i18n")
+$Directories = @("icons", "i18n")
 
-function Build-Extension {
-  param(
-    [string]$Name,
-    [string]$Manifest
-  )
-
-  $OutputDirectory = Join-Path $DistRoot $Name
-
-  if (Test-Path $OutputDirectory) {
-    Remove-Item -LiteralPath $OutputDirectory -Recurse -Force
-  }
-
-  New-Item -ItemType Directory -Path $OutputDirectory -Force | Out-Null
-
-  foreach ($File in $CommonFiles) {
-    Copy-Item -LiteralPath (Join-Path $ProjectRoot $File) -Destination $OutputDirectory
-  }
-
-  foreach ($Directory in $CommonDirectories) {
-    Copy-Item -LiteralPath (Join-Path $ProjectRoot $Directory) -Destination $OutputDirectory -Recurse
-  }
-
-  Copy-Item -LiteralPath (Join-Path $ProjectRoot $Manifest) -Destination (Join-Path $OutputDirectory "manifest.json")
-  Write-Output "Built $Name extension in $OutputDirectory"
+if (Test-Path $OutputDirectory) {
+  Remove-Item -LiteralPath $OutputDirectory -Recurse -Force
 }
 
-if ($Target -in @("chrome", "all")) {
-  Build-Extension -Name "chrome" -Manifest "manifest.chrome.json"
+New-Item -ItemType Directory -Path $OutputDirectory -Force | Out-Null
+
+foreach ($File in $Files) {
+  Copy-Item -LiteralPath (Join-Path $ProjectRoot $File) -Destination $OutputDirectory
 }
 
-if ($Target -in @("firefox", "all")) {
-  Build-Extension -Name "firefox" -Manifest "manifest.json"
+foreach ($Directory in $Directories) {
+  Copy-Item -LiteralPath (Join-Path $ProjectRoot $Directory) -Destination $OutputDirectory -Recurse
 }
+
+Write-Output "Built Firefox extension in $OutputDirectory"

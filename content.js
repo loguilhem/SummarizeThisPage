@@ -1,5 +1,5 @@
 (() => {
-  const EXTENSION_API = globalThis.browser || globalThis.chrome;
+  const EXTENSION_API = globalThis.browser;
 
   if (window.__summarizeThisPageContentScriptLoaded) {
     return;

@@ -1,5 +1,5 @@
 (() => {
-  const EXTENSION_API = globalThis.browser || globalThis.chrome;
+  const EXTENSION_API = globalThis.browser;
 
   const DEFAULT_LANGUAGE = "en";
   const SUPPORTED_LANGUAGES = ["en", "fr", "de", "it"];
