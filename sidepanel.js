@@ -111,7 +111,7 @@ function renderSummary(result) {
   }
 
   summaryOutput.classList.remove("empty");
-  summaryOutput.textContent = summary.trim();
+  summaryOutput.innerHTML = window.STP_MARKDOWN.render(summary.trim());
 
   const source = result.page?.truncated
     ? window.STP_I18N.t("sidepanel.sourceTruncated")

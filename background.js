@@ -471,7 +471,9 @@ function normalizeGeminiModel(model) {
 async function buildPrompt(settings, page) {
   const messages = await loadI18nMessages(settings.summaryLanguage);
   const template = getMessageValue(messages, "prompt.template");
-  const systemInstruction = getMessageValue(messages, "prompt.systemInstruction");
+  const systemInstruction = `${getMessageValue(messages, "prompt.systemInstruction")}\n\n` +
+    "Return only valid Markdown. Use Markdown headings, lists, emphasis, links and code blocks when relevant. " +
+    "Do not wrap the entire response in a code block and do not return HTML.";
 
   return {
     systemInstruction,

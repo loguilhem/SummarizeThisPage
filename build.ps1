@@ -9,6 +9,7 @@ $DistRoot = Join-Path $ProjectRoot "dist"
 $CommonFiles = @(
   "background.js",
   "content.js",
+  "markdown.js",
   "sidepanel.html",
   "sidepanel.js",
   "options.html",

@@ -247,11 +247,99 @@ button:disabled {
   overflow: auto;
   padding: 14px;
   line-height: 1.55;
-  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 
 .summary-output.empty {
   color: var(--muted);
+  white-space: pre-wrap;
+}
+
+.summary-output > :first-child {
+  margin-top: 0;
+}
+
+.summary-output > :last-child {
+  margin-bottom: 0;
+}
+
+.summary-output h1,
+.summary-output h2,
+.summary-output h3,
+.summary-output h4,
+.summary-output h5,
+.summary-output h6 {
+  margin: 1.2em 0 0.45em;
+  line-height: 1.3;
+}
+
+.summary-output h1 {
+  font-size: 1.35rem;
+}
+
+.summary-output h2 {
+  font-size: 1.2rem;
+}
+
+.summary-output h3,
+.summary-output h4,
+.summary-output h5,
+.summary-output h6 {
+  font-size: 1.05rem;
+}
+
+.summary-output p,
+.summary-output ul,
+.summary-output ol,
+.summary-output blockquote,
+.summary-output pre {
+  margin: 0 0 0.85em;
+}
+
+.summary-output ul,
+.summary-output ol {
+  padding-left: 1.5rem;
+}
+
+.summary-output li + li {
+  margin-top: 0.25em;
+}
+
+.summary-output blockquote {
+  border-left: 3px solid var(--border);
+  padding-left: 0.85em;
+  color: var(--muted);
+}
+
+.summary-output code {
+  border-radius: 4px;
+  padding: 0.1em 0.3em;
+  background: rgba(127, 127, 127, 0.14);
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 0.9em;
+}
+
+.summary-output pre {
+  overflow: auto;
+  border-radius: 8px;
+  padding: 12px;
+  background: rgba(127, 127, 127, 0.14);
+}
+
+.summary-output pre code {
+  padding: 0;
+  background: none;
+  white-space: pre;
+}
+
+.summary-output a {
+  color: var(--accent-dark);
+}
+
+.summary-output hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 1em 0;
 }
 
 .options-body {

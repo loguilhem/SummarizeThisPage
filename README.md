@@ -31,7 +31,7 @@ Chrome 121 or later is required.
 1. Open `chrome://extensions`.
 2. Enable **Developer mode**.
 3. Click **Load unpacked**.
-4. Select the `dist/chrome` directory.
+4. Select the `dist/chrome` directory. Do not select the project root: its `manifest.json` is the Firefox manifest.
 
 ### Firefox
 
@@ -88,6 +88,7 @@ The extension requests the following browser permissions:
 .
 |-- background.js       # Provider requests and extension orchestration
 |-- content.js          # Web page content extraction
+|-- markdown.js         # Safe Markdown rendering
 |-- sidepanel.html/js   # Summary interface
 |-- options.html/js     # Provider and preference settings
 |-- styles.css          # Shared styles
